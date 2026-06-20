@@ -1,0 +1,4 @@
+C:\Users\Kira Minkova\source\repos\EX02-Shapes-S24\x64\Debug\EX02-Shapes-S24.vcxproj.CopyComplete
+C:\Users\Kira Minkova\source\repos\EX02-Shapes-S24\x64\Debug\EX02-Shapes-S24.exe
+C:\Users\Kira Minkova\source\repos\EX02-Shapes-S24\x64\Debug\gtest.pdb
+C:\Users\Kira Minkova\source\repos\EX02-Shapes-S24\x64\Debug\gtest_main.pdb
