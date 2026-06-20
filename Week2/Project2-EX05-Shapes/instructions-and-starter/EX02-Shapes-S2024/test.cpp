@@ -51,7 +51,7 @@ namespace {
 
     using std::string;
 
-    using namespace ::testing_internal;
+    
 
     class ShapesTests : public ::testing::Test {
     protected:

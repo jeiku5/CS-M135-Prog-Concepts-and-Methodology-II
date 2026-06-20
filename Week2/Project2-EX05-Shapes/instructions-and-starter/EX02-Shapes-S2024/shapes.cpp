@@ -30,19 +30,19 @@ namespace edu {
                 }
 
                 double Rectangle::computeArea() const {
-                    return 0.0; // Put your code here
+                    return _width * _height;
                 }
 
                 bool Rectangle::operator ==(const Rectangle& rhs) const {
-                    return 0.0; // Put your code here
+                    return getX() == rhs.getX() && getY() == rhs.getY() && _width == rhs._width && _height == rhs._height;
                 }
 
                 double Circle::computeArea() const {
-                    return 0.0; // Put your code here
+                    return _radius * _radius * std::numbers::pi;
                 }
 
                 bool Circle::operator ==(const Circle& rhs) const {
-                    return 0.0; // Put your code here
+                    return getX() == rhs.getX() && getY() == rhs.getY() && _radius == rhs._radius && _radius == rhs._radius;
                 }
 
             }
