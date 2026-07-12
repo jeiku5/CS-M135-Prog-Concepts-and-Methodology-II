@@ -74,7 +74,5 @@ int main() // This is my main function
     }
     cout << endl;
 
-
-
     return 0;
 }
