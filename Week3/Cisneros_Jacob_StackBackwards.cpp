@@ -1,85 +1,86 @@
-#include <iostream>     // (1) brings in the standard input/output library so we can use cout
-using namespace std;    // (2) lets us write cout instead of std::cout every time
+#include <iostream>     // (1) lets me use cout and cin for input/output
+using namespace std;    // (2) lets us write code without having to repeat std:: everytime
 
-// (3) A Node is one "link" in the linked list. Each node holds one character
-//     and a pointer to the node underneath it in the stack.
+// (3) A class is like making my own data type, like how int and double exist.
+//     Node is one piece of the stack. It holds one letter and points to the piece under it.
 class Node
 {
 public:
-    char c;     // the value this node stores
-    Node* next; // pointer to the next node below this one
+    char c;     // the letter this node is holding
+    Node* next; // points to the node under this one
 
-    Node() { next = nullptr; c = ' '; }             // default constructor: empty node
-    Node(char value) { c = value; next = nullptr; } // constructor that stores a value right away
+    Node() { next = nullptr; c = ' '; }             // makes an empty node
+    Node(char value) { c = value; next = nullptr; } // makes a node with a letter already in it
 };
 
-// (4) The Stack is built out of Nodes. It only ever tracks ONE thing:
-//     a pointer to the top node. Everything else is reached through next pointers.
+// (4) The Stack class is my stack, built out of Nodes stacked on each other.
+//     It only remembers one thing: which node is on top.
 class Stack
 {
 public:
-    Node* topNode; // pointer to whichever node is currently on top
+    Node* topNode; // pointer that keeps track of the top of the stack
 
-    Stack() { topNode = nullptr; } // (5) constructor: runs when the stack is created, starts it empty
+    Stack() { topNode = nullptr; } // (5) runs automatically when I make a stack, starts it out empty
 
-    // (6) push = add to the top.
+    // (6) push = put a new letter on top of the stack (like adding a plate to a pile)
     void push(char value)
     {
-        Node* newNode = new Node(value); // make a new node holding the value
-        newNode->next = topNode;         // new node points down at the old top
-        topNode = newNode;               // new node becomes the top
+        Node* newNode = new Node(value); // make the new node with the letter in it
+        newNode->next = topNode;         // the new node sits on top of the old top
+        topNode = newNode;               // now the new node IS the top
     }
 
-    // (7) pop = remove the top and give its value back.
+    // (7) pop = take the top letter off the stack and give it back to me
     char pop()
     {
-        char value = topNode->c;  // save the top's value before deleting it
-        Node* temp = topNode;     // remember the old top so we can delete it
-        topNode = topNode->next;  // the node below becomes the new top
-        delete temp;              // free the old top's memory
-        return value;             // hand the value back to whoever called pop
+        char value = topNode->c;  // grab the letter before we delete the node
+        Node* temp = topNode;     // keep track of the old top so we can delete it
+        topNode = topNode->next;  // the one under it becomes the new top
+        delete temp;              // delete the old top so we don't waste memory
+        return value;             // give the letter back
     }
 
-    // (8) isEmpty = true when topNode points at nothing (no nodes left).
+    // (8) just checks if the stack has nothing in it (true or false)
     bool isEmpty()
     {
         return topNode == nullptr;
     }
 
-    // (9) Prints the stack bottom-to-top using recursion (the function calls itself),
-    //     then rebuilds the stack so it's unchanged when we're done.
+    // (9) this prints the stack from the BOTTOM up, which you normally can't do
+    //     since a stack only lets you touch the top. it works by calling itself
+    //     over and over (recursion) and it puts everything back when its done
     void printBackwards()
     {
         if (isEmpty())
         {
-            return; // base case: no nodes left, stop recursing
+            return; // stack is empty, stop calling ourselves (this ends the recursion)
         }
 
-        char value = pop();     // step 1: take the top off and hold it
-        printBackwards();       // step 2: repeat on everything below first
-        cout << value << " ";   // step 3: print on the way back up (bottom prints first)
-        push(value);            // step 4: put the value back so the stack is restored
+        char value = pop();     // step 1: take the top letter off and hold onto it
+        printBackwards();       // step 2: do this same thing to the rest of the stack
+        cout << value << " ";   // step 3: print AFTER coming back, so the bottom prints first
+        push(value);            // step 4: put the letter back so the stack isn't ruined
     }
 };
 
-// (10) main is where the program starts running.
+// (10) main is where the program actually starts running
 int main() {
 
-    Stack myStack; // (11) create a Stack object — its constructor sets topNode to nullptr
+    Stack myStack; // (11) making my stack, it starts empty because of line 23
 
-    // (12) push A, then B on top of A, then C, then D. D ends up on top.
+    // (12) putting A B C D on the stack one at a time, D ends up on top
     myStack.push('A');
     myStack.push('B');
     myStack.push('C');
     myStack.push('D');
 
-    // (13) backwards = bottom first, so this prints A B C D
+    // (13) prints A B C D since backwards means bottom first
     cout << "Printed backwards: ";
     myStack.printBackwards();
     cout << endl;
 
-    // (14) pop everything top-down (D C B A) to prove printBackwards
-    //      put the stack back exactly how it was
+    // (14) now I pop everything the normal way (top first) and it prints D C B A,
+    //      which proves printBackwards put the stack back exactly how it was
     cout << "Now popping normally to prove the stack is returned to the original state: ";
     while (!myStack.isEmpty())
     {
