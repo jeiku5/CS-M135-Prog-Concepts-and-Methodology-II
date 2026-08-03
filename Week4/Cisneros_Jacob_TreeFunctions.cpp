@@ -62,8 +62,6 @@ int main(){
     node70->left = node60;
     node70->right = node80;
 
-
-
     LNR(root);
     cout << endl;
 
